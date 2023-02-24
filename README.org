@@ -1,0 +1,2 @@
+#+title: The Tuss (Bot)
+The Tuss is a small discord bot written in Rust using the serenity-rs API
