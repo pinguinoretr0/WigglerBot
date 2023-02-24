@@ -1,8 +1,10 @@
+mod commands;
+use crate::commands::ping::PING_COMMAND;
+
 use serenity::async_trait;
 use serenity::prelude::*;
-use serenity::model::channel::Message;
-use serenity::framework::standard::macros::{command, group};
-use serenity::framework::standard::{StandardFramework, CommandResult};
+use serenity::framework::standard::macros::group;
+use serenity::framework::standard::StandardFramework;
 
 #[group]
 #[commands(ping)]
@@ -33,11 +35,4 @@ async fn main() {
     if let Err(why) = client.start().await {
         println!("An error occurred while running the client: {:?}", why);
     }
-}
-
-#[command]
-async fn ping(ctx: &Context, msg: &Message) -> CommandResult {
-    msg.reply(ctx, "Pong!").await?;
-
-    Ok(())
 }
