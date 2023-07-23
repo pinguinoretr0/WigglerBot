@@ -1,13 +1,16 @@
-mod commands;
-use crate::commands::ping::PING_COMMAND;
+mod cmds;
 
 use serenity::async_trait;
 use serenity::prelude::*;
-use serenity::framework::standard::macros::group;
-use serenity::framework::standard::StandardFramework;
+use serenity::model::channel::Message;
+use serenity::framework::standard::macros::{command, group};
+use serenity::framework::standard::{StandardFramework, CommandResult};
+
+// Commands:
+use crate::cmds::commands::*;
 
 #[group]
-#[commands(ping)]
+#[commands(product, quotient, sum, echo)]
 struct General;
 
 struct Handler;
@@ -17,15 +20,15 @@ impl EventHandler for Handler {}
 
 #[tokio::main]
 async fn main() {
+		const DISCORD_TOKEN: &str = "BOT_TOKEN";
+
     let framework = StandardFramework::new()
-        .configure(|c| c.prefix(";")) // Set Bot Prefix
+        .configure(|c| c.prefix(";")) // Set bot prefix
         .group(&GENERAL_GROUP);
 
     // Login with a bot token from the environment
-    let token = "DISCORD_TOKEN";
-
     let intents = GatewayIntents::non_privileged() | GatewayIntents::MESSAGE_CONTENT;
-    let mut client = Client::builder(token, intents)
+    let mut client = Client::builder(&DISCORD_TOKEN, intents)
         .event_handler(Handler)
         .framework(framework)
         .await
