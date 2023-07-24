@@ -19,7 +19,7 @@ impl EventHandler for Handler {}
 
 #[tokio::main]
 async fn main() {
-		const DISCORD_TOKEN: &str = "NzQ3MTEzNDEyNzIyNjg4MDgw.GgHESt.sFcwIBKG93Ly3ld1zx5u1O2N8CYEpHi_etaai4";
+		const DISCORD_TOKEN: &str = "YOUR_TOKEN_HERE";
 
     let framework = StandardFramework::new()
         .configure(|c| c.prefix(";") // set box prefix
