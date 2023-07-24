@@ -2,9 +2,8 @@ mod cmds;
 
 use serenity::async_trait;
 use serenity::prelude::*;
-use serenity::model::channel::Message;
-use serenity::framework::standard::macros::{command, group};
-use serenity::framework::standard::{StandardFramework, CommandResult};
+use serenity::framework::standard::macros::group;
+use serenity::framework::standard::StandardFramework;
 
 // Commands:
 use crate::cmds::commands::*;
@@ -20,10 +19,12 @@ impl EventHandler for Handler {}
 
 #[tokio::main]
 async fn main() {
-		const DISCORD_TOKEN: &str = "BOT_TOKEN";
+		const DISCORD_TOKEN: &str = "NzQ3MTEzNDEyNzIyNjg4MDgw.GgHESt.sFcwIBKG93Ly3ld1zx5u1O2N8CYEpHi_etaai4";
 
     let framework = StandardFramework::new()
-        .configure(|c| c.prefix(";")) // Set bot prefix
+        .configure(|c| c.prefix(";") // set box prefix
+									 .allow_dm(true) // allows bot to dm
+									 .case_insensitivity(false)) // might change this
         .group(&GENERAL_GROUP);
 
     // Login with a bot token from the environment
@@ -34,7 +35,7 @@ async fn main() {
         .await
         .expect("Error creating client");
 
-    // start listening for events by starting a single shard
+    // error checking
     if let Err(why) = client.start().await {
         println!("An error occurred while running the client: {:?}", why);
     }
