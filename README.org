@@ -1,4 +1,2 @@
 #+title: Wiggler Discord Bot
 Discord bot written in rust
-
-Idea: Integrate RWG into the bot???
