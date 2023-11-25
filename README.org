@@ -1,2 +1,9 @@
 #+title: Wiggler Discord Bot
-Discord bot written in rust
+Maple Treeway's finest: Wiggler
+
+
+Wiggler is a multipurpose Discord Bot that is being written using the
+discord.js API.
+
+
+A status update will be given later
