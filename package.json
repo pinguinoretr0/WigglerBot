@@ -1,5 +1,6 @@
 {
 		"main":"src/main.js",
+		"cmd-handler":"src/deploy-cmds.js",
 
 		"dependencies": {
 				"discord.js": "^14.14.1"
