@@ -6,14 +6,24 @@ const path = require('node:path');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
-const foldersPath = path.join(__dirname, 'cmds');
-const commandFolders = fs.readdirSync(foldersPath);
+const foldersPath = [
+		path.join(__dirname, 'cmds'),
+		path.join(__dirname, 'cmds', 'entertainment'),
+		path.join(__dirname, 'cmds', 'rwg'),
+		path.join(__dirname, 'cmds', 'util'),
+		path.join(__dirname, 'cmds', 'voice'),
+		path.join(__dirname, 'feat')];
+const commandFolders = foldersPath.flatMap(folder => fs.readdirSync(folder));
 
-for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+for (const folderPath of foldersPath) {
+	if (!fs.existsSync(folderPath)) {
+		console.log(`[INFO] Directory ${folderPath} does not exist.`);
+		continue;
+	}
+
+	const commandFiles = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
-		const filePath = path.join(commandsPath, file);
+		const filePath = path.join(folderPath, file);
 		const command = require(filePath);
 		if ('data' in command && 'execute' in command) {
 			client.commands.set(command.data.name, command);
@@ -22,6 +32,7 @@ for (const folder of commandFolders) {
 		}
 	}
 }
+
 
 /* This is the Wiggler Server that will print information
 	 into the terminal */

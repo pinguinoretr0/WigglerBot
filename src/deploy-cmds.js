@@ -29,9 +29,9 @@ const rest = new REST().setToken(token);
 
 // delete cmd before its read here
 // (this code is here in case I have to purge unneeded cmds)
-// rest.put(Routes.applicationCommands(clientId), { body: [] })
-// 	.then(() => console.log('Successfully deleted all application commands.'))
-// 	.catch(console.error);
+rest.put(Routes.applicationCommands(clientId), { body: [] })
+	.then(() => console.log('Successfully deleted all application commands.'))
+	.catch(console.error);
 
 // and deploy your commands!
 (async () => {
