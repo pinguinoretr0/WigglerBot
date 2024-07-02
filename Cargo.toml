@@ -1,0 +1,10 @@
+[package]
+name = "wigglerdb"
+authors = ["TheLinuxPirate"]
+description = "The official YellowBrick99 discord bot"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+serenity = { version = "0.12.2", default_features = true }
+tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }
