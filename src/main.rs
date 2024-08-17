@@ -9,9 +9,6 @@ mod cmds;
 
 struct Handler;
 
-// sever-id
-const GUILD_ID: u64 = 0;
-
 #[async_trait]
 impl EventHandler for Handler {
     async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
@@ -40,6 +37,9 @@ impl EventHandler for Handler {
     }
 
     async fn ready(&self, ctx: Context, ready: Ready) {
+        // sever-id
+        const GUILD_ID: u64 = 743288701148200972;
+
         println!("{} is connected!", ready.user.name);
 
         let guild_id = GuildId::new(GUILD_ID);
@@ -49,10 +49,6 @@ impl EventHandler for Handler {
             .set_commands(&ctx.http, vec![
                 cmds::ping::register(),
                 cmds::id::register(),
-                //cmds::welcome::register(),
-                //cmds::numberinput::register(),
-                //cmds::attachmentinput::register(),
-                //cmds::modal::register(),
             ])
             .await;
 
@@ -71,7 +67,7 @@ impl EventHandler for Handler {
 #[tokio::main]
 async fn main() {
     // the bots token goes here
-    const WIGGLER_TOKEN: &str = "";
+    const WIGGLER_TOKEN: &str = "INSERT_YOUR_TOKEN_HERE";
 
     // intents to notify the application about
     let intents = GatewayIntents::GUILD_MESSAGES
